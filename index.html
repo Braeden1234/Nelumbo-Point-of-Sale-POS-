@@ -1,0 +1,255 @@
+</head>
+
+<body>
+
+  <nav class="app-navbar">
+    <div class="navbar-left">
+      <button type="button" class="navbar-icon-btn" id="nav-back-btn" title="Back" aria-label="Back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5" />
+          <path d="M12 19l-7-7 7-7" />
+        </svg>
+      </button>
+    </div>
+    <div class="navbar-right" id="navbar-search-wrap">
+      <select id="navbar-filter-select" class="navbar-filter-select" title="Filter by allergen">
+        <option value="">Filter</option>
+        <option value="peanuts">Peanuts</option>
+        <option value="tree_nuts">Tree Nuts</option>
+        <option value="dairy">Dairy</option>
+        <option value="eggs">Eggs</option>
+        <option value="gluten">Gluten</option>
+        <option value="soy">Soy</option>
+        <option value="shellfish">Shellfish</option>
+      </select>
+      <div class="navbar-search-box">
+        <input type="search" id="navbar-search" class="navbar-search-input" placeholder="Search items...">
+        <div class="navbar-search-results" id="navbar-search-results"></div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="app-pages">
+
+  <!-- ============================== PAGE 1: SALES ============================== -->
+  <div class="page active" id="page-sales">
+    <div class="main-dashboard">
+
+      <!-- Sellables -->
+      <div class="sellables-panel">
+        <div class="categories" id="categories"></div>
+        <div class="items-scroll">
+          <div class="items-grid" id="items-grid"></div>
+        </div>
+      </div>
+
+      <!-- Register -->
+      <div class="register-column">
+        <div class="register-cart-panel">
+          <div class="cart-list" id="cart-list">
+            <div class="cart-empty" id="cart-empty">Tap an item to add it to the order. Hold an item to set a quantity.</div>
+          </div>
+          <div class="totals">
+            <div class="receipt-row receipt-balance">
+              <span class="receipt-label">Total</span>
+              <span class="receipt-value" id="total-value">$0.00</span>
+            </div>
+          </div>
+          <button type="button" class="pay-button" id="pay-button" disabled>Pay $0.00</button>
+        </div>
+        <div class="register-checklist-panel">
+          <div class="checklist-header">Fulfillment Checklist</div>
+          <div class="checklist-list" id="checklist-list">
+            <div class="checklist-empty" id="checklist-empty">Items ordered will appear here to prep</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================== PAGE 2: PAYMENT ============================== -->
+  <div class="page" id="page-payment">
+
+    <div class="top-section-wrapper">
+      <div class="container2">
+
+        <!-- Left Selection Keyboard Grid -->
+        <div class="money-selector" id="money-selector-panel">
+
+          <!-- Cash Matrix -->
+          <div class="container1">
+            <div class="grid-container">
+              <div class="pos-btn-card cash-1" data-value="1">
+                <div class="card-main-val">$1</div>
+                <div class="text">0</div>
+              </div>
+              <div class="pos-btn-card cash-5" data-value="5">
+                <div class="card-main-val">$5</div>
+                <div class="text">0</div>
+              </div>
+              <div class="pos-btn-card cash-10" data-value="10">
+                <div class="card-main-val">$10</div>
+                <div class="text">0</div>
+              </div>
+              <div class="pos-btn-card cash-20" data-value="20">
+                <div class="card-main-val">$20</div>
+                <div class="text">0</div>
+              </div>
+              <div class="pos-btn-card cash-50" data-value="50">
+                <div class="card-main-val">$50</div>
+                <div class="text">0</div>
+              </div>
+              <div class="pos-btn-card cash-100" data-value="100">
+                <div class="card-main-val">$100</div>
+                <div class="text">0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coins Matrix -->
+          <div class="container1">
+            <div class="grid-container">
+              <div class="pos-btn-card coin-1" data-value="0.01">
+                <div class="card-main-val">1¢</div>
+                <div class="text">0</div>
+              </div>
+              <div class="pos-btn-card coin-5" data-value="0.05">
+                <div class="card-main-val">5¢</div>
+                <div class="text">0</div>
+              </div>
+              <div class="pos-btn-card coin-10" data-value="0.10">
+                <div class="card-main-val">10¢</div>
+                <div class="text">0</div>
+              </div>
+              <div class="pos-btn-card coin-25" data-value="0.25">
+                <div class="card-main-val">25¢</div>
+                <div class="text">0</div>
+              </div>
+              <button type="button" class="btn-cash-enter" id="cash-enter-btn" disabled>Enter</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Totals / Receipt Summary Sidebar -->
+        <div class="total" id="total-panel">
+          <div class="pay-receipt-scroll" id="pay-receipt-scroll">
+            <div class="pay-receipt-row" id="row-cash" style="display:none">
+              <span class="pay-receipt-label">Cash (pending)</span>
+              <span class="pay-receipt-value" id="receipt-cash"></span>
+            </div>
+            <div id="cash-entries-list"></div>
+            <div class="pay-receipt-row" id="row-credit" style="display:none">
+              <span class="pay-receipt-label">Credit</span>
+              <span class="pay-receipt-value" id="receipt-credit"></span>
+            </div>
+            <div class="pay-receipt-row" id="row-check" style="display:none">
+              <span class="pay-receipt-label">Check</span>
+              <span class="pay-receipt-value" id="receipt-check"></span>
+            </div>
+          </div>
+          <div class="pay-receipt-row pay-receipt-balance pay-balance-due" id="row-balance">
+            <span class="pay-receipt-label" id="balance-label">Balance Due</span>
+            <span class="pay-receipt-value" id="receipt-balance">$0.00</span>
+          </div>
+          <button type="button" class="pay-button" id="complete-sale-btn" disabled>Complete Sale</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main POS Canvas underneath -->
+    <div class="pay-dashboard">
+      <!-- Left Selection Grid Component -->
+      <div class="money-selector1234">
+        <div class="grid-container1234" id="btn-grid-container">
+          <div class="pos-btn-card1234 btn-cash1234 phone-only" id="btn-pos-cash" data-value="cash_total">
+            <div class="card-main-val1234" id="cash-button-label">Cash</div>
+          </div>
+          <div class="pos-btn-card1234 btn-credit1234" id="btn-pos-1" data-value="credit">
+            <div class="card-main-val1234">Credit</div>
+          </div>
+          <div class="pos-btn-card1234 btn-credit-manual1234" id="btn-pos-2" data-value="credit_manual">
+            <div class="card-main-val1234">Credit Manual</div>
+          </div>
+          <div class="pos-btn-card1234 btn-check1234" id="btn-pos-3" data-value="check">
+            <div class="card-main-val1234">Check</div>
+          </div>
+          <div class="pos-btn-card1234 btn-other1234" id="btn-pos-4" data-value="other">
+            <div class="card-main-val1234">Other</div>
+          </div>
+          <div class="pos-btn-card1234 btn-coupons1234 wide-only" id="btn-pos-5" data-value="coupons">
+            <div class="card-main-val1234">Coupons</div>
+          </div>
+          <div class="pos-btn-card1234 btn-gift1234 wide-only" id="btn-pos-6" data-value="gift_card">
+            <div class="card-main-val1234">Gift Card</div>
+          </div>
+          <div class="pos-btn-card1234 btn-discounts1234 wide-only" id="btn-pos-7" data-value="discounts">
+            <div class="card-main-val1234">Discounts</div>
+          </div>
+        </div>
+      </div>
+      <!-- Right Bubble Checklist Component -->
+      <div class="pay-checklist-container" id="checklist-container">
+        <div class="pay-checklist" id="checklist"></div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  <!-- Hold-to-set-quantity keypad (sales page) -->
+  <div class="keypad-overlay" id="qty-keypad-overlay">
+    <div class="keypad-modal">
+      <div class="keypad-title" id="qty-keypad-title">Item qty</div>
+      <div class="keypad-display" id="qty-keypad-display">0</div>
+      <div class="keypad-grid">
+        <button type="button" class="keypad-key" data-key="1">1</button>
+        <button type="button" class="keypad-key" data-key="2">2</button>
+        <button type="button" class="keypad-key" data-key="3">3</button>
+        <button type="button" class="keypad-key" data-key="4">4</button>
+        <button type="button" class="keypad-key" data-key="5">5</button>
+        <button type="button" class="keypad-key" data-key="6">6</button>
+        <button type="button" class="keypad-key" data-key="7">7</button>
+        <button type="button" class="keypad-key" data-key="8">8</button>
+        <button type="button" class="keypad-key" data-key="9">9</button>
+        <button type="button" class="keypad-key" data-key="clear">C</button>
+        <button type="button" class="keypad-key" data-key="0">0</button>
+        <button type="button" class="keypad-key" data-key="back">⌫</button>
+      </div>
+      <div class="keypad-actions">
+        <button type="button" class="keypad-btn keypad-cancel" id="qty-keypad-cancel">Cancel</button>
+        <button type="button" class="keypad-confirm" id="qty-keypad-confirm">Set</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Denomination / cash-total / credit / check keypad (payment page) -->
+  <div class="keypad-overlay" id="keypad-overlay">
+    <div class="keypad-modal">
+      <div class="keypad-title" id="keypad-title">$5 bills</div>
+      <div class="keypad-display" id="keypad-display">0</div>
+      <div class="keypad-grid">
+        <button type="button" class="keypad-key" data-key="1">1</button>
+        <button type="button" class="keypad-key" data-key="2">2</button>
+        <button type="button" class="keypad-key" data-key="3">3</button>
+        <button type="button" class="keypad-key" data-key="4">4</button>
+        <button type="button" class="keypad-key" data-key="5">5</button>
+        <button type="button" class="keypad-key" data-key="6">6</button>
+        <button type="button" class="keypad-key" data-key="7">7</button>
+        <button type="button" class="keypad-key" data-key="8">8</button>
+        <button type="button" class="keypad-key" data-key="9">9</button>
+        <button type="button" class="keypad-key" data-key="clear">C</button>
+        <button type="button" class="keypad-key" data-key="0">0</button>
+        <button type="button" class="keypad-key" data-key="back">⌫</button>
+      </div>
+      <div class="keypad-actions">
+        <button type="button" class="keypad-btn keypad-cancel" id="keypad-cancel">Cancel</button>
+        <button type="button" class="keypad-confirm" id="keypad-confirm">Set</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
